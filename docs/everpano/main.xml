@@ -1,0 +1,258 @@
+<krpano 
+    debugmode="true"
+    idletime="60"
+>
+    
+    
+
+
+    <!-- 
+                     _           _     _____     _ 
+     _ __  _ __ ___ (_) ___  ___| |_  |___ /  __| |
+    | '_ \| '__/ _ \| |/ _ \/ __| __|   |_ \ / _` |
+    | |_) | | | (_) | |  __/ (__| |_   ___) | (_| |
+    | .__/|_|  \___// |\___|\___|\__| |____/ \__,_|
+    |_|           |__/                             
+    
+    -->
+    <include url="project3d.xml" />
+
+
+
+    <!-- 
+                       _             _             
+     _ __   __ ___   _(_) __ _  __ _| |_ ___  _ __ 
+    | '_ \ / _` \ \ / / |/ _` |/ _` | __/ _ \| '__|
+    | | | | (_| |\ V /| | (_| | (_| | || (_) | |   
+    |_| |_|\__,_| \_/ |_|\__, |\__,_|\__\___/|_|   
+                         |___/                  
+    
+    FREE VERSION OF THE NAVIGATOR PLUGIN
+    
+    FOR FURTHER OPTIONS PLEASE CONSIDER PURCHASING A PRO LICENSE AT :
+    https://everpano.com/navigator
+
+    -->    
+
+    <action autorun="preinit" type="Javascript"><![CDATA[
+        krpano.navPlugPan = [{"qu":0,"ti":0,"height":100,"ga":[1,2]},{"qu":1,"ti":0,"height":100,"ga":[0,2]},{"qu":2,"ti":0,"height":100,"ga":[1,0]}];
+        krpano.navPlugMod = [{"qu":0,"ne":0,"pu":[{"qu":0,"x":0,"y":0,"z":100,"fr":{"x":0,"y":0,"z":0},"cr":{"x":0,"y":0,"z":0},"re":0,"ki":[{"qu":0,"lo":[{"x":43.78812968491702,"y":-507.08017260804513,"z":100,"h":175.06455438039845,"v":11.115672495386711,"qu":"a"},{"x":-60.8299480704558,"y":-500.7070104273112,"z":100,"h":-173.07318940151575,"v":11.214032504737256,"qu":"b"}]}],"we":"0|0|0","dr":0},{"qu":1,"x":24.357404219214192,"y":-192.52512437938515,"z":"100.000","fr":{"x":-8.427443992589048,"y":-196.28125799638326,"z":0},"cr":{"x":43.78812968491702,"y":-507.08017260804513,"z":100},"re":6.0020897768045645,"ki":[{"qu":0,"lo":[{"qu":"a","x":43.78812968491702,"y":-507.08017260804513,"z":100},{"qu":"b","x":-62.16478711002478,"y":-500.33492000936155,"z":100}]}],"we":"0|6.002|0","dr":6.002},{"qu":2,"x":3.7658373128306915,"y":-413.2541705933678,"z":"100.000","fr":{"x":-2.417430820105679,"y":-416.13981457492713,"z":0},"cr":{"x":43.78812968491702,"y":-507.08017260804513,"z":100},"re":3.833414286223032,"ki":[{"qu":0,"lo":[{"qu":"a","x":43.78812968491702,"y":-507.08017260804513,"z":100},{"qu":"b","x":-61.56946454122657,"y":-500.1559140508159,"z":100}]}],"we":"0|3.833|0","dr":3.833}]}];
+    ]]></action>
+
+    <plugin name="navigator" keep="true" devices="html5" url="%VIEWER%/plugins/navigator.js" />
+    
+
+
+    
+    <!-- 
+                                                         _ 
+      _____   _____ _ __ _ __   __ _ _ __   ___    _   _(_)
+     / _ \ \ / / _ \ '__| '_ \ / _` | '_ \ / _ \  | | | | |
+    |  __/\ V /  __/ |  | |_) | (_| | | | | (_) | | |_| | |
+     \___| \_/ \___|_|  | .__/ \__,_|_| |_|\___/   \__,_|_|
+                        |_|                                
+    -->
+     
+    <plugin name="everpano_ui" keep="true" devices="html5" url="%VIEWER%/plugins/everpano_ui.js"
+
+        vrPosition = "left"
+        fullscreenPosition = "right"
+        
+        menuOpen = "0"
+        menuAnimation = "1"
+        showPanoTitle = "true"
+        showNextPrevious = "1"
+        showNPTooltips = "1"
+
+    />
+
+    <!--  
+                     _             _ _               
+      ___ ___  _ __ | |_ _ __ ___ | | | ___ _ __ ___ 
+     / __/ _ \| '_ \| __| '__/ _ \| | |/ _ \ '__/ __|
+    | (_| (_) | | | | |_| | | (_) | | |  __/ |  \__ \
+     \___\___/|_| |_|\__|_|  \___/|_|_|\___|_|  |___/ 
+
+    -->
+                                                 
+    <events name="navplugin_events" keep="true" webvr_onvrcontrollerbutton="navplugin_onvrcontrollerbutton()" />
+
+    <action name="navplugin_onvrcontrollerbutton" scope="local">
+        if(caller.vrbuttonindex == 1 AND caller.vrbuttonstate == 'up',
+            txtadd(controllerName, 'vr_controller_' , calc(caller.vrcontroller.hand == 'left' ? 'l' : 'r'));
+            plugin[navigator].makevrclick(get(controllerName));
+        );
+    </action>
+
+
+    <!--
+                   _ _                        _             _   _             
+    __      ____ _| | | __  _ __   __ ___   _(_) __ _  __ _| |_(_) ___  _ __  
+    \ \ /\ / / _` | | |/ / | '_ \ / _` \ \ / / |/ _` |/ _` | __| |/ _ \| '_ \ 
+     \ V  V / (_| | |   <  | | | | (_| |\ V /| | (_| | (_| | |_| | (_) | | | |
+      \_/\_/ \__,_|_|_|\_\ |_| |_|\__,_| \_/ |_|\__, |\__,_|\__|_|\___/|_| |_|
+                                                |___/                         
+    -->
+
+    <!-- ADDITIONAL WALK NAVIGATION -->
+    <!-- <include url="%VIEWER%/plugins/depthmap_navigation.xml" /> -->
+
+    
+
+
+
+    <!-- 
+                  _               
+    __      _____| |____   ___ __ 
+    \ \ /\ / / _ \ '_ \ \ / / '__|
+     \ V  V /  __/ |_) \ V /| |   
+      \_/\_/ \___|_.__/ \_/ |_|  
+
+    
+    webvr support 
+    
+    -->
+
+    <include url="%VIEWER%/plugins/webvr.xml" />
+    
+    <!-- force enabled positional tracking -->
+    <plugin name="webvr" postracking="true" />
+    
+    <!-- clear the default gamepad controls from the webvr.xml -->
+    <action name="webvr_vrcontroller_gamepad_controls"></action>
+    
+    <!-- use depthbuffer for hotspots rendering -->
+    <display depthbuffer="true" />
+    
+
+    <!-- 
+      __       _ _                                              
+     / _| ___ | | | _____      ___ __ ___   ___  _   _ ___  ___ 
+    | |_ / _ \| | |/ _ \ \ /\ / / '_ ` _ \ / _ \| | | / __|/ _ \
+    |  _| (_) | | | (_) \ V  V /| | | | | | (_) | |_| \__ \  __/
+    |_|  \___/|_|_|\___/ \_/\_/ |_| |_| |_|\___/ \__,_|___/\___|
+
+    include the followmouse tool 
+    -->
+    <include url="%VIEWER%/plugins/followmouse.xml" />
+
+
+
+    <!-- 
+                 _                         
+      __ _ _   _| |_ ___  _ __ _   _ _ __  
+     / _` | | | | __/ _ \| '__| | | | '_ \ 
+    | (_| | |_| | || (_) | |  | |_| | | | |
+     \__,_|\__,_|\__\___/|_|   \__,_|_| |_| 
+
+    -->
+
+    <!-- 
+        UNCOMMENT THOSE LINES ABOVE TO HAVE AN AUTORUN FEATURE, MAKING A TRANSITION FROM PANO TO PANO
+        YOU WILL NEED TO ADJUST TIME VALUES ACCORDINGLY TO YOUR NEEDS
+        ALSO ADJUST IDLETIME TO DEFINE WHEN TO START THE AUTO TOUR
+    -->
+
+    <!-- 
+
+    <events name="autoTourEvents" keep="true" 
+        onidle="startAutoTour();"
+        onclick="autoTourClickEvent();"
+        onmousedown="autoTourClickEvent();"
+    />
+
+    <action protect="true" name="startAutoTour">
+
+        set(autoTourRuns, true);
+        nextSceneLoop(+1);
+        delayedcall(autotour,5.0,startAutoTour(););
+
+    </action>
+
+    <action protect="true" name="stopAutoTour">
+
+        stopdelayedcall(autotour);
+        set(autoTourRuns, false);
+
+    </action>   
+
+    <action name="nextSceneLoop" scope="local" args="indexadd">
+        
+        add(newsceneindex, scene[get(xml.scene)].index, indexadd);
+        sub(lastsceneindex, scene.count, 1);
+        if(newsceneindex LT 0, copy(newsceneindex,lastsceneindex));
+        if(newsceneindex GT lastsceneindex, set(newsceneindex,0));
+
+        transition2scene(get(scene[get(newsceneindex)].name),null, MERGE, BLEND(1));
+
+    </action>
+
+    <action name="autoTourClickEvent">
+        if(autoTourRuns, stopAutoTour(););
+    </action>
+
+
+    <action name="transition2scene">
+
+        loadscene('%1', null, MERGE|KEEPVIEW|KEEPMOVING, BLEND(0.5));
+        set(events.onkeydown, stoptween(view.tx|view.ty|view.tz);set(events.onkeydown,null); );
+        tween(view.tx|view.ty|view.tz, calc('' + image.ox + '|' + image.oy + '|' + image.oz), 2, default, set(events.onkeydown,null); );
+        
+    </action> 
+
+    -->
+    
+
+    <!-- 
+
+                     _            _                              
+      ___ ___  _ __ | |_ _____  _| |_ _ __ ___   ___ _ __  _   _ 
+     / __/ _ \| '_ \| __/ _ \ \/ / __| '_ ` _ \ / _ \ '_ \| | | |
+    | (_| (_) | | | | ||  __/>  <| |_| | | | | |  __/ | | | |_| |
+     \___\___/|_| |_|\__\___/_/\_\\__|_| |_| |_|\___|_| |_|\__,_|
+                                                                 
+    contextmenu with different viewing projections 
+    
+    -->
+    <include url="%VIEWER%/plugins/contextmenu.xml" />
+    
+    
+
+
+
+
+    <!-- 
+      __           
+     / _|_ __  ___ 
+    | |_| '_ \/ __|
+    |  _| |_) \__ \
+    |_| | .__/|___/
+        |_|        
+
+    frames/second counter 
+    -->
+
+    <!-- <include url="%VIEWER%/plugins/fps.xml" /> -->
+
+
+
+
+
+    <action name="setInitialPosition" autorun="onstart" >
+
+        for(set(i,0), i LT style.count, inc(i),
+            indexoftxt(is_everpano3D_style, get(style[get(i)].name), 'everpano3d_');
+            if(is_everpano3D_style == 0 AND style[get(i)].linkedscene == xml.scene,
+                copy(view.tx, style[get(i)].ox);
+                copy(view.ty, style[get(i)].oy);
+                copy(view.tz, style[get(i)].oz);
+            );
+        );
+        
+    </action>
+
+
+
+
+  
+</krpano>

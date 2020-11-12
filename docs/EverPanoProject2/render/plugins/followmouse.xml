@@ -1,0 +1,30 @@
+<krpano>
+	
+	<action name="followmouse_init" scope="private:followmouse" autorun="onstart" devices="desktop.and.no-touch">
+		set(followspeed, 0.05);
+		set(followrange, 10);
+		set(followfactor, 1.0);
+		set(track_ry, 0);
+		set(track_rx, 0);
+		set(global.events[followmouse].keep, true);
+		set(global.events[followmouse].onviewchanged, set(global.view.haschanged,true); );
+		set(global.events[followmouse].onviewchange, followmouse_onviewchange() );
+		set(global.events[followmouse].onmousedown, scope(private:followmouse, stopdelayedcall(followmouse_reenable); tween(followfactor,0.0,0.2); ); );
+		set(global.events[followmouse].onmouseup, scope(private:followmouse, delayedcall(followmouse_reenable, 1.0, tween(followfactor,1.0,3.0) ); ); );
+	</action>
+	
+	<action name="followmouse_onviewchange" scope="private:followmouse">
+		if(global.mouse.x != 0 AND global.mouse.y != 0,
+			Math.tan(zoomscale, calc(global.view.vfov * 0.5 * Math.PI / 180.0));
+			calc(zoomscale, 1.0 / zoomscale);
+			Math.max(zoomscale, 1.0);
+			calc(new_ry, followfactor/zoomscale * followrange * (global.mouse.x / global.stagewidth - 0.5));
+			calc(new_rx, followfactor/zoomscale * followrange * (global.mouse.y / global.stageheight - 0.5));
+			calc(track_ry, track_ry*(1.0-followspeed) + new_ry*followspeed);
+			calc(track_rx, track_rx*(1.0-followspeed) + new_rx*followspeed);
+			copy(global.view.ry, track_ry);
+			copy(global.view.rx, track_rx);
+		);
+	</action>
+
+</krpano>

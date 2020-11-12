@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>murgage2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, viewport-fit=cover"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+        <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+        <style>html{height:100%;}body{height:100%;overflow:hidden;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;font-size:16px;color:#FFFFFF;background:#000000;}</style>
+    </head>
+    <body>
+        <script src="krpano.js"></script> 
+        <div id="pano" style="width:100%;height:100%;">
+            <noscript>
+                <table style="width:100%;height:100%;">
+                    <tr style="vertical-align:middle;text-align:center;">
+                        <td>ERROR:<br><br>Javascript not activated<br><br></td>
+                    </tr>
+                </table>
+            </noscript>
+            <script>
+                embedpano({
+                    xml: "main.xml",
+                    target: "pano",
+                    bgcolor: "#000000",
+                    html5: "webgl+only",
+                    mobilescale: 1.0,
+                    consolelog: true,
+                    passQueryParameters: true,
+                    onready: function(jsapi) {
+                      window.krpano = jsapi.get("global");
+                    }
+                }); 
+            </script> 
+        </div>
+    </body>
+</html>
